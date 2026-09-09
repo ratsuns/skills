@@ -4,7 +4,7 @@ This pack uses OpenSpec for change planning (`proposal` → specs → apply → 
 
 These **five gates** are a human checkpoint in the normal ship loop. The agent stops and asks only when the next step is hard to undo. Default is keep working. Not a weekly ritual. Not a prompt on every commit.
 
-The playbook is IDE-agnostic. It lives in `skills/openspec-lifecycle-gates/SKILL.md`. Other tool folders only get a short pointer after `scripts/install-pointers.mjs`.
+The playbook is IDE-agnostic. It lives in `skills/openspec-lifecycle-gates/SKILL.md`.
 
 ---
 
@@ -73,7 +73,6 @@ If the agent is merely unsure, it should **keep working**, not ask. False positi
 | Piece | Role |
 | --- | --- |
 | `skills/openspec-lifecycle-gates/SKILL.md` | Canonical playbook (name + description YAML) |
-| `skills/openspec-lifecycle-gates/scripts/` | Install OpenSpec CLI, pull official skills, plant pointers |
 | `skills/openspec-lifecycle-gates/references/workflow.md` | Longer human write-up |
 | `/lifecycle-check` | Optional Cursor shortcut |
 | `AGENTS.md` | Always-on pointer |

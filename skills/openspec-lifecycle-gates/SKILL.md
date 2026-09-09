@@ -8,7 +8,6 @@ description: >-
   a change looks finished, or a shipped story/URL changed. Also use when the
   user says lifecycle-check, hygiene, or archive prompt.
 license: MIT
-compatibility: Requires Node.js 20.19+ and the OpenSpec CLI (@fission-ai/openspec)
 metadata:
   author: ratsuns
 ---
@@ -21,7 +20,7 @@ Silence is not yes. “Sounds good” about the idea is not yes. A yes covers on
 
 The editor does not matter; OpenSpec and this playbook do.
 
-This `SKILL.md` is the full playbook. Install with `npx skills add ratsuns/skills --skill openspec-lifecycle-gates`.
+This `SKILL.md` is the full playbook.
 
 Longer write-up: [references/workflow.md](references/workflow.md).
 
@@ -29,19 +28,12 @@ Longer write-up: [references/workflow.md](references/workflow.md).
 
 You already know which tool you are. Do **not** run a script to guess the IDE.
 
-To pull official OpenSpec skills from the CLI and plant short pointers in skill folders that already exist, run from this skill folder:
-
-`node scripts/install.mjs`
-
-That install does two things:
-
-1. `npm install -g @fission-ai/openspec@latest`, then `openspec init` or `openspec update` — official `openspec-*` skills and `/opsx-*` commands come from the CLI. Do not vendor them.
-2. `scripts/install-pointers.mjs` — writes “read this playbook” files into skill folders that already exist. It does not identify the current chat.
+Do **not** install packages, download CLIs, or write files into other tools’ skill folders. Official OpenSpec skills come from the OpenSpec CLI only if this project already has them.
 
 ## Tool extras (only if they exist)
 
 - **Choice UI:** Always write numbered options in the chat. If this tool has a tap-to-choose form (for example AskQuestion), also show that. Do not rely on it alone.
-- **Slash commands:** `/lifecycle-check` is ours. `/opsx-*` appear after the OpenSpec pull if this tool uses commands.
+- **Slash commands:** `/lifecycle-check` is ours. `/opsx-*` appear only if this project already has OpenSpec commands.
 
 Do not invent a second flow in a pointer file. Pointers only send the agent here.
 
