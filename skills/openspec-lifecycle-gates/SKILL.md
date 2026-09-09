@@ -28,7 +28,27 @@ Longer write-up: [references/workflow.md](references/workflow.md).
 
 You already know which tool you are. Do **not** run a script to guess the IDE.
 
-Do **not** install packages, download CLIs, or write files into other tools’ skill folders. Official OpenSpec skills come from the OpenSpec CLI only if this project already has them.
+Do **not** install packages, download CLIs, or write files into other tools’ skill folders.
+
+## If OpenSpec is missing
+
+This skill does not install the OpenSpec CLI.
+
+If the next step needs OpenSpec and it is not already here (`openspec --version` works, or `@fission-ai/openspec` is already in the project):
+
+1. Do **not** run `npm`, `npx`, or `openspec init` yourself.
+2. Show this command for the user to run in **their** terminal:
+
+```bash
+npx @fission-ai/openspec@latest --version
+```
+
+3. Write numbered options and wait. Example:
+   1. I will run that command, then say when it is done.
+   2. Skip OpenSpec for now.
+4. After they say it is done, continue. If they skip, keep working without OpenSpec commands.
+
+Ask this at most once per session. If OpenSpec already works, do not ask.
 
 ## Tool extras (only if they exist)
 
@@ -49,7 +69,7 @@ Use this wording:
 
 ## When you MUST NOT prompt
 
-Do **not** prompt on every commit, every test, mid-bugfix, or after they already said yes. Incomplete work stays open; do not ask to archive it.
+Do **not** prompt on every commit, every test, mid-bugfix, or after they already said yes. Incomplete work stays open; do not ask to archive it. Do not ask them to install OpenSpec if it already works.
 
 If you are merely unsure, **keep working**. False positives are what make this interruptive.
 

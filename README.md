@@ -27,6 +27,18 @@ The CLI lists the skills. Pick the ones you want. Do not pass `--skill` unless y
 
 Each skill is a folder under `skills/` with a `SKILL.md` ([Agent Skills spec](https://agentskills.io/specification)). That is what [skills.sh](https://skills.sh) indexes.
 
+## OpenSpec CLI
+
+`openspec-lifecycle-gates` is a playbook. It does not install the OpenSpec CLI.
+
+If an agent needs OpenSpec and it is not already installed, it should stop and ask you to run this in your own terminal:
+
+```bash
+npx @fission-ai/openspec@latest --version
+```
+
+Then wait until you say it is done. The agent must not run that command.
+
 ## License
 
 MIT

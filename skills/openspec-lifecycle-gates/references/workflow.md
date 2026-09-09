@@ -81,3 +81,5 @@ If the agent is merely unsure, it should **keep working**, not ask. False positi
 A skill cannot draw a native IDE dialog. The portable contract is **numbered options in chat**, then wait. If this tool has a choice form, also show it. Do not rely on the form alone. Silence is not yes. A yes covers only the files and action that were named.
 
 OpenSpec already owned sync and archive. Lifecycle gates only decide **when to stop and ask**.
+
+This pack does not install the OpenSpec CLI. If the CLI is missing, the agent shows `npx @fission-ai/openspec@latest --version` and waits. The human runs that command.
