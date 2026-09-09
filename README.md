@@ -1,6 +1,6 @@
 # ratsuns/skills
 
-Agent skills from [ratsuns](https://github.com/ratsuns). Same layout as [mattpocock/skills](https://github.com/mattpocock/skills): one repo, many skills, `npx skills add` lists them.
+Agent skills from [ratsuns](https://github.com/ratsuns)
 
 [![skills.sh](https://skills.sh/b/ratsuns/skills)](https://skills.sh/ratsuns/skills)
 
