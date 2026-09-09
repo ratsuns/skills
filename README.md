@@ -27,11 +27,6 @@ The CLI lists the skills. Pick the ones you want. Do not pass `--skill` unless y
 
 Each skill is a folder under `skills/` with a `SKILL.md` ([Agent Skills spec](https://agentskills.io/specification)). That is what [skills.sh](https://skills.sh) indexes.
 
-Standalone repos (same skills, install one at a time):
-
-- [ratsuns/git-worktrees](https://github.com/ratsuns/git-worktrees)
-- [ratsuns/openspec-lifecycle-gates](https://github.com/ratsuns/openspec-lifecycle-gates)
-
 ## License
 
 MIT
