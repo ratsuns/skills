@@ -36,6 +36,8 @@ Typical coding day: **zero prompts**. Day something is ready to file away: **one
 
 Stay on the current branch. Do not switch to `main` to file a change away. The OpenSpec files go in the same PR as the code. The work is done only when the code and those files on **this** branch match.
 
+Before a **finished** commit: stop and ask them to run lint and build. Do not commit until those pass. Before pushing a PR: tests must pass. Do not push until they do. This is extra, in chat — not a new git hook.
+
 ---
 
 ## The five asks
@@ -64,8 +66,7 @@ When a round of extra tweaks is over, say in one sentence what the next ask is. 
 
 ## What we refuse to prompt on
 
-- Every commit or test
-- Mid-bugfix / lint
+- Every tiny save or mid-bugfix
 - After they already said yes
 - Incomplete work
 - Overview refresh when the story did not move
@@ -88,7 +89,5 @@ If the agent is merely unsure, it should **keep working**, not ask. False positi
 A skill cannot draw a native IDE dialog. The portable contract is **numbered options in chat**, then wait. Do not also open a picker for the same question. Silence is not yes. A yes covers only the files and action that were named.
 
 OpenSpec already owned sync and archive. Lifecycle gates only decide **when to stop and ask**.
-
-This pack does not install the OpenSpec CLI. If the CLI is missing, the agent shows `npx @fission-ai/openspec@latest --version` and waits. The human runs that command.
 
 This pack does not install the OpenSpec CLI. If the CLI is missing, the agent shows `npx @fission-ai/openspec@latest --version` and waits. The human runs that command.

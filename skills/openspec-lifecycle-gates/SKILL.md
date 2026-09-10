@@ -3,9 +3,8 @@ name: openspec-lifecycle-gates
 description: >-
   Stop and ask before writing OpenSpec files, starting implementation,
   changing the plan, filing a finished change, or updating the product
-  overview. Use whenever those moments happen, including when the user
-  changes the product after coding started. Do not wait for them to name
-  this skill.
+  overview. Before a finished commit, ask the user to run lint and build.
+  Before a PR push, tests must pass. Do not wait for them to name this skill.
 license: MIT
 metadata:
   author: ratsuns
@@ -32,6 +31,25 @@ That includes the plan, the updates after we change our minds, the “file this 
 - Do not switch branches, commit, or push unless the user says to.
 - If they say “this is on main,” they mean GitHub `main` already has the code, **or** this branch is the PR. Do **not** switch to `main`.
 - You may call the work done only when the code and the OpenSpec files on **this** branch all match. Files sitting uncommitted are not finished.
+
+## Before a finished commit or PR
+
+This is not an OpenSpec ask. It is a quality stop.
+
+When a piece of work is **finished** and they are about to commit it:
+
+1. Stop. Ask them to run lint and build. Show this project’s commands (`pnpm lint`, `pnpm build`, or whatever the repo documents).
+2. Do not commit until they say those passed, or they ask you to run them and they pass.
+3. If they fail, fix, then ask again.
+
+When they are about to **push a PR**:
+
+1. Tests must pass. Show this project’s test command (`pnpm test`, or whatever the repo documents).
+2. Do not push until tests pass (they run them, or they ask you to run them).
+
+Do not add those commands to git commit or push hooks unless this repo already does. This prompt is extra, in chat.
+
+Do not ask this on every tiny save. Only when they are committing a finished piece or pushing the PR.
 
 ## Do not detect the editor
 
@@ -87,7 +105,7 @@ When a round of extra tweaks is over (lint, build, formatting, “does this look
 
 ## When you MUST NOT ask
 
-Do **not** ask on every commit, every test, or in the middle of a small bugfix. Do not ask again after they already said yes. Do not offer to file away unfinished work. Do not ask them to install OpenSpec if it already works.
+Do **not** ask on every tiny save, every test run, or in the middle of a small bugfix. Do not ask again after they already said yes. Do not offer to file away unfinished work. Do not ask them to install OpenSpec if it already works.
 
 If you are only unsure, **keep working**. Do not spam questions. Changing the product so it no longer matches the written plan is not “just unsure” — ask item 3 above.
 
