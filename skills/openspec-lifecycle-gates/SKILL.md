@@ -1,12 +1,11 @@
 ---
 name: openspec-lifecycle-gates
 description: >-
-  Prompts the user at five software-lifecycle decision points and waits for an
-  explicit yes before writing OpenSpec files, applying a change, changing
-  scope, syncing/archiving, or refreshing the product overview. Use when
-  planning or proposing a change, starting apply, a spec disagrees with code,
-  a change looks finished, or a shipped story/URL changed. Also use when the
-  user says lifecycle-check, hygiene, or archive prompt.
+  Stop and ask before writing OpenSpec files, starting implementation,
+  changing the plan, filing a finished change, or updating the product
+  overview. Use whenever those moments happen, including when the user
+  changes the product after coding started. Do not wait for them to name
+  this skill.
 license: MIT
 metadata:
   author: ratsuns
@@ -14,7 +13,7 @@ metadata:
 
 # OpenSpec lifecycle gates
 
-Stop and ask. Do not run the next workflow until the user answers **in a separate message**.
+Stop and ask. Do not do the next OpenSpec step until the user answers in a **separate message**.
 
 Silence is not yes. “Sounds good” about the idea is not yes. A yes covers only the files and action you named.
 
@@ -23,6 +22,16 @@ The editor does not matter; OpenSpec and this playbook do.
 This `SKILL.md` is the full playbook.
 
 Longer write-up: [references/workflow.md](references/workflow.md).
+
+## Stay on this branch
+
+Keep the code and the OpenSpec files on **whatever branch you are already on**.
+
+That includes the plan, the updates after we change our minds, the “file this change away” folder, and the product overview.
+
+- Do not switch branches, commit, or push unless the user says to.
+- If they say “this is on main,” they mean GitHub `main` already has the code, **or** this branch is the PR. Do **not** switch to `main`.
+- You may call the work done only when the code and the OpenSpec files on **this** branch all match. Files sitting uncommitted are not finished.
 
 ## Do not detect the editor
 
@@ -34,7 +43,9 @@ Do **not** install packages, download CLIs, or write files into other tools’ s
 
 This skill does not install the OpenSpec CLI.
 
-If the next step needs OpenSpec and it is not already here (`openspec --version` works, or `@fission-ai/openspec` is already in the project):
+OpenSpec is already here if `openspec --version` works, or `pnpm exec openspec --version` works, or `@fission-ai/openspec` is in `package.json`. Prefer `pnpm exec openspec` if `openspec` is not on `PATH`. Do not ask to install.
+
+Only if none of those is true:
 
 1. Do **not** run `npm`, `npx`, or `openspec init` yourself.
 2. Show this command for the user to run in **their** terminal:
@@ -48,43 +59,44 @@ npx @fission-ai/openspec@latest --version
    2. Skip OpenSpec for now.
 4. After they say it is done, continue. If they skip, keep working without OpenSpec commands.
 
-Ask this at most once per session. If OpenSpec already works, do not ask.
+Ask this at most once per session.
 
-## Tool extras (only if they exist)
+## How to ask
 
-- **Choice UI:** Always write numbered options in the chat. If this tool has a tap-to-choose form (for example AskQuestion), also show that. Do not rely on it alone.
-- **Slash commands:** `/lifecycle-check` is ours. `/opsx-*` appear only if this project already has OpenSpec commands.
+Write **1. 2. 3.** in the chat. One question. Then wait.
+
+Do **not** also open a multiple-choice popup for the same question.
+
+`/lifecycle-check` is this pack’s optional shortcut. `/opsx-*` appear only if this project already has OpenSpec commands.
 
 Do not invent a second flow in a pointer file. Pointers only send the agent here.
 
-## When you MUST prompt
+## When you MUST ask
 
 Use this wording:
 
 1. **New work vs existing change** — before I create or write OpenSpec files.
-2. **Start coding** — plan is done; you have not said “apply.”
-3. **The ticket is wrong** — code and the spec disagree, and I would have to change scope.
-4. **The work landed** — tasks done, code on `main`; sync + archive or leave it open.
-5. **The story changed** — after archive, only if a use case, URL, or “ships vs in flight” line moved (overview).
+2. **Start coding** — the plan is done; you have not said to implement it.
+3. **The ticket is wrong** — we built something the written plan does not allow (or omits). After we start coding, if you change the product (for example delete a page the plan still requires), stop and ask whether to **update the written plan**. Do this as soon as that happens. Do not wait for the user to mention this skill.
+4. **The work landed** — the tasks are done on this branch. Ask: file this OpenSpec change away on **this** branch, or leave it open?
+5. **The story changed** — only **after** the change is filed away, and only if the product overview’s use cases, URLs, or “shipped vs still in flight” list is now wrong.
 
-## When you MUST NOT prompt
+If they open the overview **before** the change is filed away: say what would need to change, and wait. Do not edit the overview yet.
 
-Do **not** prompt on every commit, every test, mid-bugfix, or after they already said yes. Incomplete work stays open; do not ask to archive it. Do not ask them to install OpenSpec if it already works.
+When a round of extra tweaks is over (lint, build, formatting, “does this look right”), say in **one sentence** what the next ask is (update the plan, or file the change away). Do not wait for them to point you at this skill.
 
-If you are merely unsure, **keep working**. False positives are what make this interruptive.
+## When you MUST NOT ask
 
-## How to prompt
+Do **not** ask on every commit, every test, or in the middle of a small bugfix. Do not ask again after they already said yes. Do not offer to file away unfinished work. Do not ask them to install OpenSpec if it already works.
 
-Read-only first (`openspec list`, status, specs, code, overview).
+If you are only unsure, **keep working**. Do not spam questions. Changing the product so it no longer matches the written plan is not “just unsure” — ask item 3 above.
 
-Then write the gate as **numbered options in chat**. If this tool has a choice form, also show that. One question, two or more options. Put the facts in the question. Then **stop** and wait.
+## After they say yes
 
-After yes:
-
-| Gate | Then |
+| They said yes to | Then do this, still on this branch |
 | --- | --- |
 | 1 | New change → `openspec-propose` / `openspec new change`. Existing → `openspec-update-change`. |
 | 2 | `openspec-apply-change` |
-| 3 | `openspec-update-change` if they want the plan fixed; apply only if they keep the spec |
-| 4 | `openspec-sync-specs` then `openspec-archive-change` (those skills still ask their own sync confirm if needed) |
+| 3 | `openspec-update-change` to fix the plan. Implement more only if they want the old plan kept. |
+| 4 | Copy the change’s spec into `openspec/specs/`, then move the change folder into `openspec/changes/archive/`. If they already said yes to **both** of those in one answer, do both. Do not ask a second time “copy the spec first?” |
 | 5 | Edit `openspec/application-overview/overview.md` only |
