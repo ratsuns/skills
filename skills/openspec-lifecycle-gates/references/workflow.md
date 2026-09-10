@@ -36,7 +36,7 @@ Typical coding day: **zero prompts**. Day something is ready to file away: **one
 
 Stay on the current branch. Do not switch to `main` to file a change away. The OpenSpec files go in the same PR as the code. The work is done only when the code and those files on **this** branch match.
 
-Before a **finished** commit: stop and ask them to run lint and build. Do not commit until those pass. Before pushing a PR: tests must pass. Do not push until they do. This is extra, in chat — not a new git hook.
+Before a **finished** commit: the agent runs lint and build. Do not ask the user to run those. Do not commit until they pass. Before pushing a PR: the agent runs tests. Do not push until they pass. This is extra, in chat — not a new git hook.
 
 ---
 
@@ -70,7 +70,7 @@ When a round of extra tweaks is over, say in one sentence what the next ask is. 
 - After they already said yes
 - Incomplete work
 - Overview refresh when the story did not move
-- A second multiple-choice popup for a question already listed as 1. 2. 3. in chat
+- Replacing the picker with only a numbered list in chat when this tool has a picker
 
 If the agent is merely unsure, it should **keep working**, not ask. False positives are what make this interruptive. Changing the product so it no longer matches the written plan is not “just unsure” — that is ask 3.
 
@@ -86,7 +86,7 @@ If the agent is merely unsure, it should **keep working**, not ask. False positi
 | `AGENTS.md` | Always-on pointer |
 | `openspec/` | Empty spec-driven scaffold |
 
-A skill cannot draw a native IDE dialog. The portable contract is **numbered options in chat**, then wait. Do not also open a picker for the same question. Silence is not yes. A yes covers only the files and action that were named.
+Humans digest a clickable picker better than a numbered list. In Cursor, use the AskQuestion tool. Do not replace the picker with only `1. 2. 3.` in chat. If this tool has no picker, fall back to numbered options, then wait. Silence is not yes. A yes covers only the files and action that were named.
 
 OpenSpec already owned sync and archive. Lifecycle gates only decide **when to stop and ask**.
 

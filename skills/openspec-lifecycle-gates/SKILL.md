@@ -3,8 +3,9 @@ name: openspec-lifecycle-gates
 description: >-
   Stop and ask before writing OpenSpec files, starting implementation,
   changing the plan, filing a finished change, or updating the product
-  overview. Before a finished commit, ask the user to run lint and build.
-  Before a PR push, tests must pass. Do not wait for them to name this skill.
+  overview. Use the clickable picker. Before a finished commit, the agent
+  runs lint and build. Before a PR push, the agent runs tests. Do not wait
+  for them to name this skill.
 license: MIT
 metadata:
   author: ratsuns
@@ -38,18 +39,19 @@ This is not an OpenSpec ask. It is a quality stop.
 
 When a piece of work is **finished** and they are about to commit it:
 
-1. Stop. Ask them to run lint and build. Show this project’s commands (`pnpm lint`, `pnpm build`, or whatever the repo documents).
-2. Do not commit until they say those passed, or they ask you to run them and they pass.
-3. If they fail, fix, then ask again.
+1. Run lint and build yourself. Use this project’s commands (`pnpm lint`, `pnpm build`, or whatever the repo documents).
+2. Do not ask the user to run those commands.
+3. Do not commit until they pass.
+4. If they fail, fix, then run them again.
 
 When they are about to **push a PR**:
 
-1. Tests must pass. Show this project’s test command (`pnpm test`, or whatever the repo documents).
-2. Do not push until tests pass (they run them, or they ask you to run them).
+1. Run tests yourself. Use this project’s test command (`pnpm test`, or whatever the repo documents).
+2. Do not push until tests pass.
 
-Do not add those commands to git commit or push hooks unless this repo already does. This prompt is extra, in chat.
+Do not add those commands to git commit or push hooks unless this repo already does. The agent running them in chat is extra.
 
-Do not ask this on every tiny save. Only when they are committing a finished piece or pushing the PR.
+Do not do this on every tiny save. Only when they are committing a finished piece or pushing the PR.
 
 ## Do not detect the editor
 
@@ -72,18 +74,20 @@ Only if none of those is true:
 npx @fission-ai/openspec@latest --version
 ```
 
-3. Write numbered options and wait. Example:
-   1. I will run that command, then say when it is done.
-   2. Skip OpenSpec for now.
+3. Ask with the picker (see How to ask). Options: they will run that command, or skip OpenSpec for now.
 4. After they say it is done, continue. If they skip, keep working without OpenSpec commands.
 
 Ask this at most once per session.
 
 ## How to ask
 
-Write **1. 2. 3.** in the chat. One question. Then wait.
+Humans digest a **clickable picker** better than a numbered list in chat.
 
-Do **not** also open a multiple-choice popup for the same question.
+In Cursor, use the **AskQuestion** tool (the choice form). One question. Then wait.
+
+Do **not** replace the picker with only `1. 2. 3.` in the chat. Do **not** skip the picker because a numbered list is already in the message.
+
+If this tool has no picker, fall back to numbered options in chat, then wait.
 
 `/lifecycle-check` is this pack’s optional shortcut. `/opsx-*` appear only if this project already has OpenSpec commands.
 
